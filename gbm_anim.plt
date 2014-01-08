@@ -15,5 +15,5 @@ set term gif animate size 400, 400
 set output 'data/pic/gbm_u_sim1.gif'
 
 do for [t = 0:198] {
-	splot 'data/gbm_u_'.t.'.dat' notitle
+	splot 'data/gbm_u_'.t.'.dat' using 2:1:3 notitle
 }
