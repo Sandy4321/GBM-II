@@ -56,11 +56,13 @@ class petroSim(object):
                             (a, 1 - 4 * a, a),
                             (0, a, 0)))
                
+        exportTime = 1 / simTime[1]
+		
         for t in range(round(simTime[0] / simTime[1])):        
             self.step(simTime[1], kernelU, kernelV, simParam)
-            if t % 10 == 9:
-                print(round((t + 1) / 10))
-                self.exportData(round((t + 1) / 10))
+            if t % exportTime == (exportTime - 1):
+                print(round((t + 1) / exportTime))
+                self.exportData(round((t + 1) / exportTime))
             
         return (self.arrU, self.arrV)
     
@@ -77,7 +79,9 @@ class petroSim(object):
         
         for x in range(0, self.xlen):
             for y in range(0, self.xlen):    
-                _IndexString = str(x) + " " + str(y)                
+                _x = x * self.dx
+                _y = y * self.dx
+                _IndexString = str(_x) + " " + str(_y)                
                 _UString = _IndexString + " " + str(self.arrU[x][y]) + "\n"
                 _VString = _IndexString + " " + str(self.arrV[x][y]) + "\n"              
                 
